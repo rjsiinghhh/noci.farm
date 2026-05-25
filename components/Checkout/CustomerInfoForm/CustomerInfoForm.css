@@ -1,0 +1,128 @@
+/*=============== CUSTOMER INFO FORM ===============*/
+.customer-info-form-header {
+  margin-bottom: 32px;
+}
+
+.customer-info-form-title {
+  font-family: var(--font-now);
+  font-size: 24px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 8px;
+}
+
+.customer-info-form-subtitle {
+  font-size: 16px;
+  color: #6b7280;
+  font-weight: 400;
+}
+
+.customer-info-form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.customer-info-form-row {
+  display: flex;
+  gap: 24px;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    gap: 24px;
+  }
+}
+
+.customer-info-form-row-three {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+.customer-info-form-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.customer-info-form-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.customer-info-form-input {
+  padding: 16px 20px;
+  border: 2px solid #e5e5e5;
+  border-radius: 12px;
+  font-size: 16px;
+  font-family: var(--font-now);
+  transition: 300ms ease;
+  background-color: #ffffff;
+}
+
+.customer-info-form-input:focus {
+  outline: none;
+  border-color: #000000;
+}
+
+.customer-info-form-input.error {
+  border-color: #dc2626;
+}
+
+.customer-info-form-input::placeholder {
+  color: #9ca3af;
+}
+
+.customer-info-form-error {
+  font-size: 14px;
+  color: #dc2626;
+  font-weight: 500;
+}
+
+.customer-info-form-footer {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #e5e5e5;
+}
+
+.customer-info-form-submit-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 18px 32px;
+  background-color: #000000;
+  color: #ffffff;
+  border-radius: 100px;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  transition: 300ms ease;
+  border: 1px solid #000000;
+  font-family: var(--font-now);
+}
+
+.customer-info-form-submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.customer-info-form-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.customer-info-form-submit-btn:active,
+.customer-info-form-submit-btn:focus,
+.customer-info-form-submit-btn:focus-visible,
+.customer-info-form-submit-btn:focus-within {
+  outline: none;
+  border-color: #323232;
+}

@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://noci.farm/sitemap.xml
+
+# Disallow checkout and order confirmation pages from indexing
+Disallow: /checkout
+Disallow: /order-confirmation/

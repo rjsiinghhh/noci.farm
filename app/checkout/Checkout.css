@@ -1,0 +1,75 @@
+/*=============== CHECKOUT PAGE ===============*/
+.checkout-page {
+  padding-top: 40px;
+  padding-bottom: 80px;
+}
+
+.checkout-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.checkout-title {
+  font-family: var(--font-now);
+  font-size: 48px;
+  font-weight: 700;
+  color: #000000;
+}
+
+.checkout-subtitle {
+  font-size: 18px;
+  color: #6b7280;
+  font-weight: 400;
+}
+
+.checkout-content {
+  display: grid;
+  grid-template-columns: 1fr 450px;
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media (max-width: 1023px) {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+.checkout-left {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+
+  @media (max-width: 767px) {
+    padding: 24px;
+    order: 2;
+  }
+}
+
+.checkout-right {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  height: fit-content;
+
+  @media (max-width: 767px) {
+    padding: 24px;
+    order: 1;
+  }
+}
+
+@media (max-width: 767px) {
+  .checkout-page {
+    padding-top: 40px;
+    padding-bottom: 60px;
+  }
+
+  .checkout-left,
+  .checkout-right {
+    padding: 24px;
+  }
+}

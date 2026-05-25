@@ -1,0 +1,355 @@
+.admin-reviews {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  flex: 1;
+}
+
+.admin-reviews-header {
+  margin-bottom: 32px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 24px;
+  }
+}
+
+.admin-reviews-title {
+  font-size: 48px;
+  font-weight: bold;
+  color: #000000;
+
+  @media (max-width: 768px) {
+    font-size: 32px;
+  }
+}
+
+.admin-reviews-subtitle {
+  font-size: 16px;
+  color: #666666;
+}
+
+.admin-reviews-filters {
+  margin-bottom: 24px;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+.admin-reviews-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.admin-reviews-search-icon {
+  position: absolute;
+  left: 16px;
+  font-size: 20px;
+  color: #666666;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.admin-reviews-search-input {
+  flex: 1;
+  padding: 12px 16px 12px 48px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #000000;
+  width: 100%;
+}
+
+.admin-reviews-search-input:focus {
+  outline: none;
+  border-color: #000000;
+}
+
+.admin-reviews-search:focus-within .admin-reviews-search-icon {
+  color: #000000;
+}
+
+.admin-reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+}
+
+.admin-reviews-list-content {
+  position: relative;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.admin-reviews-loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  border-radius: 8px;
+  min-height: 200px;
+}
+
+.admin-reviews-list-loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.admin-review-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 24px;
+  transition: box-shadow 0.2s;
+}
+
+.admin-review-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.admin-review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.admin-review-header-left {
+  flex: 1;
+}
+
+.admin-review-order-number {
+  font-size: 18px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0 0 8px 0;
+}
+
+.admin-review-order-number code {
+  background-color: #f0f0f0;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+}
+
+.admin-review-customer,
+.admin-review-total {
+  font-size: 14px;
+  color: #333333;
+  margin: 4px 0;
+}
+
+.admin-review-customer strong,
+.admin-review-total strong {
+  color: #000000;
+  font-weight: 600;
+}
+
+.admin-review-date {
+  font-size: 14px;
+  color: #666666;
+  margin: 4px 0 0 0;
+}
+
+.admin-review-header-right {
+  text-align: right;
+}
+
+.admin-review-average {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.admin-review-average-label {
+  font-size: 12px;
+  color: #666666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.admin-review-average-value {
+  font-size: 20px;
+  font-weight: bold;
+  color: #000000;
+}
+
+.admin-review-products {
+  margin-bottom: 20px;
+}
+
+.admin-review-products-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0 0 12px 0;
+}
+
+.admin-review-products-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-review-product {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background-color: #f8f8f8;
+  border-radius: 4px;
+}
+
+.admin-review-product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.admin-review-product-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.admin-review-product-details {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.admin-review-product-quantity,
+.admin-review-product-size {
+  font-size: 13px;
+  color: #666666;
+}
+
+.admin-review-product-id {
+  font-size: 14px;
+  color: #666666;
+  font-family: 'Courier New', monospace;
+}
+
+.admin-review-product-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.admin-review-star {
+  font-size: 20px;
+  color: #ddd;
+}
+
+.admin-review-star.active {
+  color: #ffc107;
+}
+
+.admin-review-product-rating-value {
+  font-size: 14px;
+  color: #666666;
+  margin-left: 8px;
+  font-weight: 500;
+}
+
+.admin-review-feedback {
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.admin-review-feedback-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0 0 12px 0;
+}
+
+.admin-review-feedback-text {
+  font-size: 14px;
+  color: #333333;
+  line-height: 1.6;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.admin-reviews-empty,
+.admin-reviews-error {
+  text-align: center;
+  padding: 40px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  color: #666666;
+}
+
+.admin-reviews-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.admin-reviews-load-more {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  margin-top: 16px;
+}
+
+.admin-reviews-load-more-button {
+  padding: 12px 32px;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, opacity 0.2s;
+}
+
+.admin-reviews-load-more-button:hover:not(:disabled) {
+  background-color: #333333;
+}
+
+.admin-reviews-load-more-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .admin-review-header {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .admin-review-header-right {
+    text-align: left;
+  }
+
+  .admin-review-product {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .admin-reviews-load-more {
+    padding: 16px;
+  }
+}

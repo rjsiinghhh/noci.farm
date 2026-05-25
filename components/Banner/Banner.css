@@ -1,0 +1,52 @@
+/* Banner */
+.banner {
+  margin-top: 100px;
+  background-image: url('/images/banner-bg.webp');
+  height: 500px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  @media (max-width: 767px) {
+    margin-top: 60px;
+    height: 400px;
+  }
+
+  @media (max-width: 500px) {
+    height: 300px;
+  }
+}
+
+.banner-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.banner-title {
+  padding: 25px;
+  width: fit-content;
+  background: rgba(255, 255, 255, 0.865);
+  font-family: var(--font-now);
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  color: #000000;
+  border: 4px double #000000;
+  border-radius: 8px;
+
+  @media (max-width: 767px) {
+    font-size: 32px;
+    padding: 16px;
+  }
+
+  @media (max-width: 500px) {
+    font-size: 24px;
+  }
+}

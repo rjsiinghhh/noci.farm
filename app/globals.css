@@ -1,0 +1,784 @@
+/* Now Font Family */
+@font-face {
+  font-family: 'Now';
+  src: url('/fonts/now/Now-Thin.woff2') format('woff2'),
+    url('/fonts/now/Now-Thin.woff') format('woff'),
+    url('/fonts/now/Now-Thin.eot') format('embedded-opentype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Now';
+  src: url('/fonts/now/Now-ExtraLight.woff2') format('woff2'),
+    url('/fonts/now/Now-ExtraLight.woff') format('woff'),
+    url('/fonts/now/Now-ExtraLight.eot') format('embedded-opentype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Now';
+  src: url('/fonts/now/Now-Light.woff2') format('woff2'),
+    url('/fonts/now/Now-Light.woff') format('woff'),
+    url('/fonts/now/Now-Light.eot') format('embedded-opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Now';
+  src: url('/fonts/now/Now-Regular.woff2') format('woff2'),
+    url('/fonts/now/Now-Regular.woff') format('woff'),
+    url('/fonts/now/Now-Regular.eot') format('embedded-opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Now';
+  src: url('/fonts/now/Now-Medium.woff2') format('woff2'),
+    url('/fonts/now/Now-Medium.woff') format('woff'),
+    url('/fonts/now/Now-Medium.eot') format('embedded-opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Now';
+  src: url('/fonts/now/Now-SemiBold.woff2') format('woff2'),
+    url('/fonts/now/Now-SemiBold.woff') format('woff'),
+    url('/fonts/now/Now-SemiBold.eot') format('embedded-opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Now';
+  src: url('/fonts/now/Now-Bold.woff2') format('woff2'),
+    url('/fonts/now/Now-Bold.woff') format('woff'),
+    url('/fonts/now/Now-Bold.eot') format('embedded-opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Now';
+  src: url('/fonts/now/Now-ExtraBold.woff2') format('woff2'),
+    url('/fonts/now/Now-ExtraBold.woff') format('woff'),
+    url('/fonts/now/Now-ExtraBold.eot') format('embedded-opentype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Now';
+  src: url('/fonts/now/Now-Black.woff2') format('woff2'),
+    url('/fonts/now/Now-Black.woff') format('woff'),
+    url('/fonts/now/Now-Black.eot') format('embedded-opentype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* SK Glypher Font Family */
+@font-face {
+  font-family: 'SKGlypher';
+  src: url('/fonts/sk-glypher/SK Glypher-Regular.woff2') format('woff2'),
+    url('/fonts/sk-glypher/SK Glypher-Regular.woff') format('woff'),
+    url('/fonts/sk-glypher/SK Glypher-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SKGlypher';
+  src: url('/fonts/sk-glypher/SK Glypher-Bold.woff2') format('woff2'),
+    url('/fonts/sk-glypher/SK Glypher-Bold.woff') format('woff'),
+    url('/fonts/sk-glypher/SK Glypher-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TEFont';
+  src: url('/fonts/te-font/te.woff2') format('woff2'),
+    url('/fonts/te-font/te.woff') format('woff'),
+    url('/fonts/te-font/te.ttf') format('truetype'),
+    url('/fonts/te-font/te.eot') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url();
+}
+
+/* Global font usage */
+:root {
+  --font-now: 'Now', system-ui, sans-serif;
+  --font-sk-glypher: 'SKGlypher', system-ui, sans-serif;
+  --font-te: 'TEFont', serif;
+}
+
+/*=============== BASE ===============*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-now);
+  font-size: 24px;
+  line-height: 1.3;
+  font-weight: 400;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: unset;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+u {
+  text-underline-offset: 6px;
+}
+
+.container {
+  max-width: calc(1440rem / 16);
+  width: min(100% - calc(32rem / 16));
+  margin: 0 auto;
+}
+
+main {
+  margin-top: 90px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/*=============== ORDER CONFIRMATION PAGE ===============*/
+.order-confirmation-page {
+  padding-top: 40px;
+  padding-bottom: 80px;
+
+  @media (max-width: 767px) {
+    padding-top: 40px;
+    padding-bottom: 60px;
+  }
+}
+
+.order-confirmation-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.order-confirmation-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.order-confirmation-success-icon {
+  font-size: 64px;
+}
+
+.order-confirmation-title {
+  font-family: var(--font-now);
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #000000;
+}
+
+.order-confirmation-subtitle {
+  font-size: 18px;
+  color: #6b7280;
+  font-weight: 400;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.order-confirmation-content {
+  display: grid;
+  grid-template-columns: 1fr 450px;
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto 48px auto;
+
+  @media (max-width: 1023px) {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+.order-confirmation-left {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+
+  @media (max-width: 767px) {
+    padding: 24px;
+  }
+}
+
+.order-confirmation-right {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  height: fit-content;
+
+  @media (max-width: 767px) {
+    padding: 24px;
+  }
+}
+
+.order-confirmation-section-title {
+  font-family: var(--font-now);
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #000000;
+  text-align: center;
+}
+
+.order-confirmation-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+  padding: 20px;
+  background-color: #f9fafb;
+  border-radius: 12px;
+}
+
+.order-confirmation-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-confirmation-info-label {
+  font-size: 16px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.order-confirmation-info-value {
+  font-size: 16px;
+  color: #000000;
+  font-weight: 600;
+}
+
+.order-confirmation-status {
+  color: #059669;
+  font-weight: 700;
+}
+
+.order-confirmation-shipping {
+  margin-bottom: 32px;
+}
+
+.order-confirmation-shipping-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #000000;
+}
+
+.order-confirmation-shipping-address {
+  padding: 20px;
+  background-color: #f9fafb;
+  border-radius: 12px;
+}
+
+.order-confirmation-shipping-address p {
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: #000000;
+}
+
+.order-confirmation-shipping-address p:last-child {
+  margin-bottom: 0;
+}
+
+.order-confirmation-items {
+  margin-bottom: 32px;
+}
+
+.order-confirmation-items-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #000000;
+}
+
+.order-confirmation-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 16px 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.order-confirmation-item:last-child {
+  border-bottom: none;
+}
+
+.order-confirmation-item-image {
+  flex-shrink: 0;
+}
+
+.order-confirmation-item-img {
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.order-confirmation-item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.order-confirmation-item-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.order-confirmation-item-size {
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 400;
+}
+
+.order-confirmation-item-price {
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 400;
+}
+
+.order-confirmation-item-total {
+  font-size: 16px;
+  font-weight: 700;
+  color: #000000;
+}
+
+/*=============== FREE ITEM STYLES ===============*/
+.order-confirmation-item-free {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  /* border: 1px solid #bbf7d0; */
+  border-radius: 12px;
+  padding: 16px;
+  margin: 8px 0;
+}
+
+.order-confirmation-item-image {
+  position: relative;
+}
+
+.order-confirmation-free-badge {
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
+}
+
+.order-confirmation-free-price {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.order-confirmation-original-price {
+  text-decoration: line-through;
+  color: #9ca3af;
+}
+
+.order-confirmation-free-label {
+  color: #10b981;
+  font-weight: 700;
+}
+
+.order-confirmation-free-total {
+  color: #10b981;
+  font-weight: 700;
+}
+
+.order-confirmation-total {
+  padding-top: 8px;
+  border-top: 1px solid #e5e5e5;
+}
+
+.order-confirmation-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 8px;
+}
+
+.order-confirmation-total-label {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.order-confirmation-total-value {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.order-confirmation-total-final {
+  padding-top: 8px;
+  padding-bottom: 0;
+  border-top: 1px solid #e5e5e5;
+
+  .order-confirmation-total-label {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .order-confirmation-total-value {
+    font-size: 24px;
+    font-weight: 700;
+  }
+}
+
+.order-confirmation-next-steps-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #000000;
+  font-family: var(--font-now);
+  text-align: center;
+}
+
+.order-confirmation-next-steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.order-confirmation-next-step {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.order-confirmation-next-step-icon {
+  font-size: 24px;
+  margin-top: 2px;
+}
+
+.order-confirmation-next-step-content h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #000000;
+}
+
+.order-confirmation-next-step-content p {
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 400;
+}
+
+.order-confirmation-contact {
+  padding: 16px;
+  background-color: #f0f9ff;
+  border-radius: 12px;
+  border: 1px solid #bae6fd;
+}
+
+.order-confirmation-contact > h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #000000;
+}
+
+.order-confirmation-contact > p {
+  font-size: 14px;
+  color: #0369a1;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.order-confirmation-contact p:last-child {
+  margin-bottom: 0;
+}
+
+.order-confirmation-actions {
+  text-align: center;
+}
+
+.order-confirmation-home-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  margin: 0 auto;
+  padding: 18px 32px;
+  background-color: #000000;
+  color: #ffffff;
+  border-radius: 100px;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: 300ms ease;
+  font-family: var(--font-now);
+
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+}
+
+.order-confirmation-home-btn:hover {
+  transform: translateY(-2px);
+}
+
+.order-confirmation-loading,
+.order-confirmation-error {
+  text-align: center;
+  padding: 80px 24px;
+}
+
+.order-confirmation-loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #e5e5e5;
+  border-top: 4px solid #000000;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 24px auto;
+}
+
+.order-confirmation-error > h1 {
+  font-family: var(--font-now);
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #000000;
+}
+
+.order-confirmation-error > p {
+  font-size: 18px;
+  color: #6b7280;
+  margin-bottom: 32px;
+}
+
+.order-confirmation-error-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 64px;
+  margin-bottom: 16px;
+  color: #dc2626;
+}
+
+/*=============== PAYMENT PROCESSING STYLES ===============*/
+.checkout-form-processing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  padding: 48px 24px;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+.checkout-form-processing-content {
+  text-align: center;
+  max-width: 400px;
+}
+
+.checkout-form-processing-spinner {
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #f3f4f6;
+  border-top: 4px solid #000000;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.checkout-form-processing-title {
+  font-family: 'Now', system-ui, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+.checkout-form-processing-subtitle {
+  font-family: 'Now', system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #6b7280;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Responsive design for processing screen */
+@media (max-width: 767px) {
+  .checkout-form-processing {
+    min-height: 300px;
+    padding: 32px 16px;
+  }
+
+  .checkout-form-processing-title {
+    font-size: 20px;
+  }
+
+  .checkout-form-processing-subtitle {
+    font-size: 14px;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border-width: 3px;
+  }
+}
+
+/*=============== PAYMENT PROCESSING MODAL ===============*/
+.payment-processing-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(4px);
+}
+
+.payment-processing-modal {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 48px 32px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.payment-processing-modal-content {
+  text-align: center;
+}
+
+.payment-processing-modal-spinner {
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.payment-processing-modal-title {
+  font-family: 'Now', system-ui, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+.payment-processing-modal-subtitle {
+  font-family: 'Now', system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #6b7280;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Responsive design for modal */
+@media (max-width: 767px) {
+  .payment-processing-modal {
+    padding: 32px 24px;
+    margin: 16px;
+  }
+
+  .payment-processing-modal-title {
+    font-size: 20px;
+  }
+
+  .payment-processing-modal-subtitle {
+    font-size: 14px;
+  }
+}

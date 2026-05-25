@@ -1,0 +1,258 @@
+/*=============== PAYMENT FORM ===============*/
+.payment-form-header {
+  margin-bottom: 32px;
+}
+
+.payment-form-title {
+  font-family: var(--font-now);
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #000000;
+}
+
+.payment-form-subtitle {
+  font-size: 16px;
+  color: #6b7280;
+  font-weight: 400;
+}
+
+.payment-form-summary {
+  background-color: #f9fafb;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 32px;
+}
+
+.payment-form-summary-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.payment-form-summary-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.payment-form-summary-value {
+  font-size: 16px;
+  font-weight: 500;
+  color: #000000;
+}
+
+.payment-form-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.payment-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.payment-form-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.payment-form-card-element {
+  padding: 16px 20px;
+  border: 2px solid #e5e5e5;
+  border-radius: 12px;
+  background-color: #ffffff;
+  transition: 300ms ease;
+}
+
+.payment-form-card-element:focus-within {
+  border-color: #000000;
+}
+
+/* Payment Element styles */
+.payment-form-payment-element {
+  padding: 16px 20px;
+  border: 2px solid #e5e5e5;
+  border-radius: 12px;
+  background-color: #ffffff;
+  transition: border-color 0.3s ease;
+}
+
+.payment-form-payment-element:focus-within {
+  border-color: #000000;
+}
+
+/* Payment Element specific styles */
+.payment-form-payment-element .p-Input {
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 16px;
+  font-family: var(--font-now);
+  color: #000000;
+}
+
+.payment-form-payment-element .p-Input:focus {
+  border-color: #000000;
+  outline: none;
+}
+
+.payment-form-payment-element .p-Tab {
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 4px;
+  background-color: #ffffff;
+  color: #000000;
+  font-family: var(--font-now);
+  font-size: 14px;
+  cursor: pointer;
+  transition: 300ms ease;
+}
+
+.payment-form-payment-element .p-Tab:hover {
+  border-color: #000000;
+  background-color: #f5f5f5;
+}
+
+.payment-form-payment-element .p-Tab--selected {
+  border-color: #000000;
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.payment-form-payment-element .p-TabIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.payment-form-payment-element .p-Label {
+  font-family: var(--font-now);
+  font-size: 14px;
+  color: #000000;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.payment-form-payment-element .p-Fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.payment-form-payment-element .p-FieldsetLabel {
+  font-family: var(--font-now);
+  font-size: 16px;
+  color: #000000;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.payment-form-error {
+  padding: 16px 20px;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 12px;
+}
+
+.payment-form-error-text {
+  font-size: 14px;
+  color: #dc2626;
+  font-weight: 500;
+}
+
+.payment-form-footer {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
+}
+
+.payment-form-back-btn {
+  width: 50%;
+  padding: 16px 24px;
+  background-color: #ffffff;
+  color: #000000;
+  border-radius: 100px;
+  border: 1px solid #000000;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  transition: 300ms ease;
+  font-family: var(--font-now);
+
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+}
+
+.payment-form-back-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.payment-form-back-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.payment-form-submit-btn {
+  width: 50%;
+  padding: 16px 24px;
+  background-color: #000000;
+  color: #ffffff;
+  border-radius: 100px;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  transition: 300ms ease;
+  border: 1px solid #000000;
+  font-family: var(--font-now);
+
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+}
+
+.payment-form-submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.payment-form-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.payment-form-security {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-top: 32px;
+  padding: 20px;
+  background-color: #f0f9ff;
+  border-radius: 12px;
+  border: 1px solid #bae6fd;
+}
+
+.payment-form-security-icon {
+  font-size: 20px;
+  margin-top: 2px;
+}
+
+.payment-form-security-text p {
+  font-size: 14px;
+  color: #0369a1;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.payment-form-security-text p:last-child {
+  margin-bottom: 0;
+}

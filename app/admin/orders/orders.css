@@ -1,0 +1,366 @@
+.admin-orders {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  flex: 1;
+}
+
+.admin-orders-header {
+  margin-bottom: 32px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 24px;
+  }
+}
+
+.admin-orders-title {
+  font-size: 48px;
+  font-weight: bold;
+  color: #000000;
+
+  @media (max-width: 768px) {
+    font-size: 32px;
+  }
+}
+
+.admin-orders-subtitle {
+  font-size: 16px;
+  color: #666666;
+}
+
+.admin-orders-filters {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+.admin-orders-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.admin-orders-search-icon {
+  position: absolute;
+  left: 16px;
+  font-size: 20px;
+  color: #666666;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.admin-orders-search-input {
+  flex: 1;
+  padding: 12px 16px 12px 48px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #000000;
+  width: 100%;
+}
+
+.admin-orders-search-input:focus {
+  outline: none;
+  border-color: #000000;
+}
+
+.admin-orders-search:focus-within .admin-orders-search-icon {
+  color: #000000;
+}
+
+.admin-orders-status-filter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-orders-filter-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.admin-orders-filter-select {
+  padding: 12px 40px 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #000000;
+  background-color: #ffffff;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  min-width: 180px;
+}
+
+.admin-orders-filter-select:focus {
+  outline: none;
+  border-color: #000000;
+}
+
+.admin-orders-filter-icon {
+  position: absolute;
+  right: 16px;
+  font-size: 18px;
+  color: #666666;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.admin-orders-filter-wrapper:focus-within .admin-orders-filter-icon {
+  color: #000000;
+}
+
+.admin-dashboard-recent {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.admin-dashboard-orders-table {
+  overflow-x: auto;
+  position: relative;
+}
+
+.admin-orders-loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  border-radius: 8px;
+}
+
+.admin-orders-table-loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.admin-orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow-x: auto;
+}
+
+.admin-orders-table thead {
+  background-color: #f8f8f8;
+}
+
+.admin-orders-table th {
+  padding: 16px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000;
+  letter-spacing: 0.5px;
+
+  &:first-child {
+    text-align: left;
+  }
+
+  &:last-child {
+    text-align: right;
+  }
+}
+
+.admin-orders-table-no {
+  max-width: 200px;
+  min-width: 200px;
+}
+
+.admin-orders-table-customer {
+  max-width: 250px;
+  min-width: 250px;
+}
+
+.admin-orders-table-email {
+  max-width: 250px;
+  min-width: 250px;
+}
+
+.admin-orders-table-amount {
+  max-width: 120px;
+  min-width: 120px;
+}
+
+.admin-orders-table-status {
+  max-width: 120px;
+  min-width: 120px;
+}
+
+.admin-orders-table-order-date {
+  max-width: 120px;
+  min-width: 120px;
+}
+
+.admin-orders-table-action {
+  max-width: 100px;
+  min-width: 100px;
+}
+
+.admin-orders-table tbody tr {
+  border-bottom: 1px solid #e0e0e0;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.admin-orders-table td {
+  padding: 16px;
+  font-size: 14px;
+  color: #333333;
+
+  &:first-child {
+    text-align: left;
+  }
+
+  &:last-child {
+    text-align: right;
+  }
+}
+
+.admin-orders-table tbody tr:hover {
+  background-color: #f8f8f8;
+}
+
+.admin-order-number {
+  background-color: #f0f0f0;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  color: #000000;
+}
+
+.admin-status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.admin-status-paid {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.admin-status-processing {
+  background-color: #fff3e0;
+  color: #f57c00;
+}
+
+.admin-status-shipped {
+  background-color: #e8f5e9;
+  color: #388e3c;
+}
+
+.admin-status-delivered {
+  background-color: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.admin-status-received {
+  background-color: #e0f2f1;
+  color: #00796b;
+}
+
+.admin-order-link {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  background-color: #f0f0f0;
+  padding: 4px 8px;
+  border-radius: 4px;
+  width: fit-content;
+  margin-left: auto;
+}
+
+.admin-order-link:hover {
+  background-color: #e0e0e0;
+}
+
+.admin-orders-empty,
+.admin-orders-error {
+  text-align: center;
+  padding: 40px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  color: #666666;
+}
+
+.admin-orders-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 16px;
+}
+
+.admin-orders-load-more {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  margin-top: 16px;
+}
+
+.admin-orders-load-more-button {
+  padding: 12px 32px;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, opacity 0.2s;
+}
+
+.admin-orders-load-more-button:hover:not(:disabled) {
+  background-color: #333333;
+}
+
+.admin-orders-load-more-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .admin-orders-filters {
+    padding: 16px;
+  }
+
+  .admin-orders-status-filter {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .admin-dashboard-recent {
+    padding: 16px;
+  }
+
+  .admin-orders-load-more {
+    padding: 16px;
+  }
+}

@@ -1,0 +1,41 @@
+/* Coming Soon */
+.coming-soon {
+  padding-top: 100px;
+  padding-bottom: 80px;
+
+  @media (max-width: 767px) {
+    padding-top: 60px;
+    padding-bottom: 40px;
+  }
+}
+
+.coming-soon-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.coming-soon-title {
+  font-family: var(--font-sk-glypher);
+  font-size: 64px;
+  line-height: 1.1;
+  font-weight: 400;
+  color: #ff5757;
+  text-align: center;
+
+  @media (max-width: 767px) {
+    font-size: 48px;
+  }
+}
+
+.coming-soon-description {
+  font-size: 20px;
+  text-align: center;
+  max-width: 920px;
+  width: 100%;
+  margin: 0 auto;
+
+  @media (max-width: 767px) {
+    font-size: 16px;
+  }
+}

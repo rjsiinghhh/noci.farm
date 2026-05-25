@@ -1,0 +1,141 @@
+/* Footer */
+
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 4px;
+  line-height: 1;
+}
+
+.footer-logo-image {
+  width: auto;
+  height: auto;
+  max-width: 180px;
+  object-fit: contain;
+
+  @media (max-width: 767px) {
+    max-width: 140px;
+  }
+}
+
+.footer-logo-noci {
+  font-family: var(--font-sk-glypher);
+  font-size: 80px;
+  font-weight: 400;
+  color: #ff5757;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+
+  @media (max-width: 767px) {
+    font-size: 45px;
+  }
+}
+
+.footer-logo-farm {
+  font-family: var(--font-te);
+  font-size: 40px;
+  font-weight: 400;
+  color: #707070;
+  letter-spacing: 0.01em;
+
+  @media (max-width: 767px) {
+    font-size: 32px;
+  }
+}
+
+.footer-content {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 32px;
+  border-bottom: 1px solid #e5e5e5;
+
+  @media (max-width: 767px) {
+    padding-bottom: 24px;
+    flex-direction: column;
+  }
+}
+
+.footer-text {
+  font-size: 18px;
+  text-align: center;
+
+  @media (max-width: 767px) {
+    font-size: 16px;
+  }
+}
+
+.footer-contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.footer-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  color: #000000;
+}
+
+.footer-contact-link {
+  color: #000000;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-contact-link:hover {
+  color: #666666;
+}
+
+.footer-contact-icon {
+  font-size: 16px;
+}
+
+.footer-socials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.footer-social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  background-color: #000000;
+  color: #ffffff;
+  border-radius: 50%;
+  transition: 300ms ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  &:active,
+  &:focus,
+  &:focus-visible,
+  &:focus-within {
+    outline: none;
+    border-color: #323232;
+  }
+}
+
+.footer-copyright-text {
+  padding: 32px 0;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.6;
+
+  @media (max-width: 767px) {
+    padding: 24px 0;
+  }
+}

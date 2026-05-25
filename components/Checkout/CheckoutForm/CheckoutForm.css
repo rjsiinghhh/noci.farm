@@ -1,0 +1,65 @@
+/*=============== CHECKOUT FORM ===============*/
+.checkout-form-header {
+  margin-bottom: 32px;
+}
+
+.checkout-form-steps {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+
+  @media (max-width: 767px) {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.checkout-form-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  border-radius: 100px;
+  background-color: #f3f4f6;
+  transition: 300ms ease;
+  width: 50%;
+
+  @media (max-width: 767px) {
+    width: 300px;
+  }
+}
+
+.checkout-form-step.active {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.checkout-form-step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.checkout-form-step.active .checkout-form-step-number {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.checkout-form-step-text {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+@media (max-width: 767px) {
+  .checkout-form-steps {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
