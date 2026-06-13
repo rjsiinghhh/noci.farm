@@ -6,6 +6,7 @@ import {
   CartValidationError,
   calculateCartTotals,
   normalizeIncomingItems,
+  validateCustomerInfo,
   validatePaymentIntentForOrder,
 } from '@/lib/cart-validation';
 import { STANDARD_SIZE } from '@/data/products';
@@ -23,6 +24,26 @@ const generateOrderId = () => {
   return `ORD-${year}-${month}${day}-${random}`;
 };
 
+// Map a Supabase orders row to the API response shape used by the checkout flow.
+const mapOrderRowToResponse = order => ({
+  id: order.id,
+  orderNumber: order.order_number,
+  customerInfo: {
+    name: order.customer_name,
+    email: order.customer_email,
+    address: order.customer_address?.address,
+    city: order.customer_address?.city,
+    state: order.customer_address?.state,
+    zipCode: order.customer_address?.zipCode,
+  },
+  items: order.items,
+  totalAmount: order.total_amount,
+  status: order.status,
+  stripePaymentIntentId: order.stripe_payment_intent_id,
+  createdAt: order.created_at,
+  trackingNumber: order.tracking_number || null,
+});
+
 export async function POST(request) {
   try {
     console.log('Creating new order...');
@@ -33,10 +54,10 @@ export async function POST(request) {
       throw new CartValidationError('Stripe payment intent is required');
     }
 
+    validateCustomerInfo(customerInfo);
     const normalizedItems = normalizeIncomingItems(items);
 
     console.log('Order data received:', {
-      customerInfo,
       itemsCount: normalizedItems.length,
       stripePaymentIntentId,
     });
@@ -66,24 +87,7 @@ export async function POST(request) {
     if (existingOrder) {
       return NextResponse.json({
         success: true,
-        order: {
-          id: existingOrder.id,
-          orderNumber: existingOrder.order_number,
-          customerInfo: {
-            name: existingOrder.customer_name,
-            email: existingOrder.customer_email,
-            address: existingOrder.customer_address?.address,
-            city: existingOrder.customer_address?.city,
-            state: existingOrder.customer_address?.state,
-            zipCode: existingOrder.customer_address?.zipCode,
-          },
-          items: existingOrder.items,
-          totalAmount: existingOrder.total_amount,
-          status: existingOrder.status,
-          stripePaymentIntentId: existingOrder.stripe_payment_intent_id,
-          createdAt: existingOrder.created_at,
-          trackingNumber: existingOrder.tracking_number || null,
-        },
+        order: mapOrderRowToResponse(existingOrder),
       });
     }
 
@@ -121,7 +125,7 @@ export async function POST(request) {
       status: 'paid',
     };
 
-    console.log('Saving order to Supabase:', orderData);
+    console.log('Saving order to Supabase:', orderNumber);
 
     // Save to Supabase
     const { data: savedOrder, error: dbError } = await supabase
@@ -131,11 +135,29 @@ export async function POST(request) {
       .single();
 
     if (dbError) {
+      // 23505 = unique_violation. The webhook (payment_intent.succeeded) created
+      // this order concurrently. Return the existing row so the customer still
+      // gets a success response; the webhook path already sent the email.
+      if (dbError.code === '23505') {
+        const { data: raceOrder } = await supabase
+          .from('orders')
+          .select('*')
+          .eq('stripe_payment_intent_id', stripePaymentIntentId)
+          .single();
+
+        if (raceOrder) {
+          return NextResponse.json({
+            success: true,
+            order: mapOrderRowToResponse(raceOrder),
+          });
+        }
+      }
+
       console.error('Error saving order to Supabase:', dbError);
       throw new Error(`Failed to save order: ${dbError.message}`);
     }
 
-    console.log('Order saved successfully to Supabase:', savedOrder);
+    console.log('Order saved successfully to Supabase:', savedOrder.order_number);
 
     // Format order for response (matching old format for compatibility)
     const newOrder = {
@@ -205,6 +227,15 @@ export async function GET(request) {
       );
     }
 
+    // Require a matching customer email so order numbers (which are guessable)
+    // can't be used to enumerate other customers' PII.
+    if (!email) {
+      return NextResponse.json(
+        { error: 'Customer email is required' },
+        { status: 400 },
+      );
+    }
+
     const supabase = createSupabaseServerClient();
     let query = supabase.from('orders').select('*');
 
@@ -230,8 +261,8 @@ export async function GET(request) {
 
     const order = orders[0];
 
-    // If email is provided, verify it matches
-    if (email && order.customer_email !== email) {
+    // Verify the supplied email matches the order owner (case-insensitive).
+    if (order.customer_email?.toLowerCase() !== email.toLowerCase()) {
       return NextResponse.json({ error: 'Order not found' }, { status: 404 });
     }
 

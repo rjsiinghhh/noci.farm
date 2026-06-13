@@ -74,7 +74,28 @@ const ensureOrderFromPaymentIntent = async paymentIntent => {
     .single();
 
   if (insertError) {
+    // 23505 = unique_violation. The client-side POST /api/orders path created
+    // this order between our existence check and this insert (the dual-path
+    // race). The winning path already sent the confirmation email, so treat as
+    // success and skip the duplicate insert/email.
+    if (insertError.code === '23505') {
+      return;
+    }
+    // Charged but not persisted by either path right now. Returning 500 makes
+    // Stripe retry the webhook; the reconcile cron is the longer-term backstop.
+    console.error(
+      `[ORDER_PERSIST_FAILURE] ${paymentIntent.id}: ${insertError.message}`,
+    );
     throw new Error(`Failed to persist webhook order: ${insertError.message}`);
+  }
+
+  // Skip (don't call the email provider with an empty recipient) when the
+  // PaymentIntent metadata carried no customer email.
+  if (!customerInfo.email) {
+    console.warn(
+      `[ORDER_EMAIL_SKIPPED] order ${savedOrder.order_number} (${paymentIntent.id}) has no customer email`,
+    );
+    return;
   }
 
   try {

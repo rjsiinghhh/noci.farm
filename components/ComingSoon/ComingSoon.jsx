@@ -6,7 +6,7 @@ const ComingSoon = () => {
     <section className="coming-soon container">
       <div className="coming-soon-content">
         <h2 className="coming-soon-title">
-          Buy 1 &
+          Buy 2 &
           <br /> Get 1 Free
         </h2>
         <p className="coming-soon-description">

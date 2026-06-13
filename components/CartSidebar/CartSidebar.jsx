@@ -12,6 +12,7 @@ import {
   STANDARD_SIZE,
 } from '@/data/products';
 import { getCheckoutButtonLabel } from '@/lib/cart-display';
+import { freeEntitlementForQuantity } from '@/lib/bogo';
 import { FiX, FiPlus, FiMinus, FiShoppingBag } from 'react-icons/fi';
 import BOGOSelectionModal from '@/components/BOGOSelectionModal';
 import './CartSidebar.css';
@@ -46,9 +47,15 @@ const CartSidebar = () => {
   };
 
   const handlePaidItemIncrement = item => {
-    handleQuantityChange(item.id, item.size, false, item.quantity + 1);
+    const nextQuantity = item.quantity + 1;
+    handleQuantityChange(item.id, item.size, false, nextQuantity);
 
-    if (isBOGOEligible(item)) {
+    // Buy 2, get 1: only offer a free pick when crossing a new threshold.
+    if (
+      isBOGOEligible(item) &&
+      freeEntitlementForQuantity(nextQuantity) >
+        freeEntitlementForQuantity(item.quantity)
+    ) {
       enqueueBOGOSelection(item);
     }
   };
@@ -59,6 +66,32 @@ const CartSidebar = () => {
 
   const handleBOGOFreeItemSelection = selectedProduct => {
     if (!activeBOGOSelection) return;
+
+    // Guard against a stale queued pick: if the paid line's quantity was reduced
+    // after this selection was enqueued, its free entitlement may already be
+    // fully used. Drop the pick rather than create an un-checkoutable cart.
+    const paidKey = getCartItemKey(
+      activeBOGOSelection.id,
+      activeBOGOSelection.size,
+    );
+    const paidLine = state.items.find(
+      cartItem =>
+        !cartItem.isFreeItem && getCartItemKey(cartItem.id, cartItem.size) === paidKey,
+    );
+    const entitlement = paidLine
+      ? freeEntitlementForQuantity(paidLine.quantity)
+      : 0;
+    const consumedFreeUnits = state.items
+      .filter(
+        cartItem =>
+          cartItem.isFreeItem && cartItem.linkedToCartItemKey === paidKey,
+      )
+      .reduce((sum, cartItem) => sum + cartItem.quantity, 0);
+
+    if (consumedFreeUnits >= entitlement) {
+      closeActiveBOGOSelection();
+      return;
+    }
 
     const freeSize = normalizeProductSize(
       selectedProduct,

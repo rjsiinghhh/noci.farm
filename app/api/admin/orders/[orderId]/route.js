@@ -1,7 +1,11 @@
 import { NextResponse } from 'next/server';
 import { createSupabaseServerClient } from '@/lib/supabase';
+import { requireAdmin } from '@/lib/admin-auth';
 
 export async function GET(request, { params }) {
+  const unauthorized = requireAdmin(request);
+  if (unauthorized) return unauthorized;
+
   try {
     const { orderId } = await params;
 
@@ -31,6 +35,9 @@ export async function GET(request, { params }) {
 }
 
 export async function PATCH(request, { params }) {
+  const unauthorized = requireAdmin(request);
+  if (unauthorized) return unauthorized;
+
   try {
     const { orderId } = await params;
     const { status, tracking_number } = await request.json();

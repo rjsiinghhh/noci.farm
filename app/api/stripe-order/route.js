@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe-server';
 import { createSupabaseServerClient } from '@/lib/supabase';
+import { hasOrderAccess } from '@/lib/order-access';
 
 export async function GET(request) {
   try {
@@ -12,6 +13,12 @@ export async function GET(request) {
         { error: 'Payment Intent ID is required' },
         { status: 400 }
       );
+    }
+
+    // Only the browser that created this PaymentIntent (and thus holds the
+    // signed order-access cookie) may read its order details / PII.
+    if (!hasOrderAccess(request, paymentIntentId)) {
+      return NextResponse.json({ error: 'Order not found' }, { status: 404 });
     }
 
     // Fetch payment intent from Stripe
@@ -93,8 +100,6 @@ export async function GET(request) {
       total: parseFloat(metadata.total || '0'),
       amount: paymentIntent.amount / 100, // Convert from cents
     };
-
-    console.log('Order data extracted from Stripe:', order);
 
     return NextResponse.json(order);
   } catch (error) {

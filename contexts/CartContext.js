@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useReducer, useEffect } from 'react';
 import { STANDARD_SIZE } from '@/data/products';
+import { freeEntitlementForQuantity } from '@/lib/bogo';
 
 // Initial cart state
 const initialState = {
@@ -26,6 +27,36 @@ const cartActions = {
 };
 
 const getCartItemKey = (id, size = STANDARD_SIZE) => `${id}::${size}`;
+
+// Drop free items that can't be honored — no linked paid line, or beyond the
+// buy-2-get-1 entitlement — so a stale/tampered localStorage cart never reaches
+// an un-checkoutable state (server validation would otherwise reject it).
+const sanitizeCartItems = items => {
+  if (!Array.isArray(items)) return [];
+
+  const paidUnitsByKey = new Map();
+  for (const item of items) {
+    if (item.isFreeItem) continue;
+    const key = getCartItemKey(item.id, item.size);
+    paidUnitsByKey.set(key, (paidUnitsByKey.get(key) || 0) + (item.quantity || 0));
+  }
+
+  const consumedByKey = new Map();
+  return items.filter(item => {
+    if (!item.isFreeItem) return true;
+
+    const key = item.linkedToCartItemKey;
+    if (!key || !paidUnitsByKey.has(key)) return false;
+
+    const entitlement = freeEntitlementForQuantity(paidUnitsByKey.get(key));
+    const used = consumedByKey.get(key) || 0;
+    const qty = item.quantity || 1;
+    if (used + qty > entitlement) return false;
+
+    consumedByKey.set(key, used + qty);
+    return true;
+  });
+};
 
 const calculateCartTotals = items => {
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
@@ -139,16 +170,15 @@ function cartReducer(state, action) {
             return false;
           }
 
-          // Remove free picks linked to this paid line item.
+          // Remove free picks linked to this paid line item. Match strictly by
+          // the paid line key (id::size); the old name-based fallback could
+          // wrongly remove a free item belonging to the same product at a
+          // different size.
           const isLinkedByKey =
             Boolean(item.isFreeItem) &&
             item.linkedToCartItemKey === paidItemKey;
-          const isLinkedByLegacyName =
-            Boolean(item.isFreeItem) &&
-            !item.linkedToCartItemKey &&
-            item.linkedToProduct === itemToRemove.name;
 
-          if (isLinkedByKey || isLinkedByLegacyName) {
+          if (isLinkedByKey) {
             return false;
           }
 
@@ -218,9 +248,7 @@ function cartReducer(state, action) {
           const linkedFreeItems = newItems.filter(
             item =>
               Boolean(item.isFreeItem) &&
-              (item.linkedToCartItemKey === paidItemKey ||
-                (!item.linkedToCartItemKey &&
-                  item.linkedToProduct === paidItem.name)),
+              item.linkedToCartItemKey === paidItemKey,
           );
 
           const linkedFreeUnits = linkedFreeItems.reduce(
@@ -228,8 +256,11 @@ function cartReducer(state, action) {
             0,
           );
 
-          if (linkedFreeUnits > paidItem.quantity) {
-            let unitsToTrim = linkedFreeUnits - paidItem.quantity;
+          const freeEntitlement = freeEntitlementForQuantity(
+            paidItem.quantity,
+          );
+          if (linkedFreeUnits > freeEntitlement) {
+            let unitsToTrim = linkedFreeUnits - freeEntitlement;
             const trimmedItems = [...newItems];
 
             for (
@@ -240,9 +271,7 @@ function cartReducer(state, action) {
               const item = trimmedItems[i];
               const isLinkedFree =
                 Boolean(item.isFreeItem) &&
-                (item.linkedToCartItemKey === paidItemKey ||
-                  (!item.linkedToCartItemKey &&
-                    item.linkedToProduct === paidItem.name));
+                item.linkedToCartItemKey === paidItemKey;
 
               if (!isLinkedFree) continue;
 
@@ -314,9 +343,11 @@ export function CartProvider({ children }) {
   // Handle RESTORE_CART action
   const enhancedDispatch = action => {
     if (action.type === 'RESTORE_CART') {
+      const items = sanitizeCartItems(action.payload?.items);
+      const { totalItems, totalPrice } = calculateCartTotals(items);
       return dispatch({
         type: cartActions.SET_CART,
-        payload: action.payload,
+        payload: { items, totalItems, totalPrice },
       });
     }
     dispatch(action);

@@ -143,7 +143,12 @@ export default function AdminLayout({ children }) {
         </nav>
         <div className="admin-sidebar-footer">
           <button
-            onClick={() => {
+            onClick={async () => {
+              try {
+                await fetch('/api/admin/auth', { method: 'DELETE' });
+              } catch (err) {
+                console.error('Logout error:', err);
+              }
               localStorage.removeItem('admin_authenticated');
               localStorage.removeItem('admin_session_time');
               router.push('/admin/login');

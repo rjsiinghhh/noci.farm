@@ -1,10 +1,18 @@
 import { NextResponse } from 'next/server';
 import { createSupabaseServerClient } from '@/lib/supabase';
+import { requireAdmin } from '@/lib/admin-auth';
+
+// Neutralize PostgREST `.or()`/ilike filter metacharacters (filter injection).
+const sanitizeSearchTerm = value =>
+  String(value).replace(/[,()*\\%]/g, ' ').trim();
 
 export async function GET(request) {
+  const unauthorized = requireAdmin(request);
+  if (unauthorized) return unauthorized;
+
   try {
     const { searchParams } = new URL(request.url);
-    const search = searchParams.get('search');
+    const search = sanitizeSearchTerm(searchParams.get('search') || '');
     const page = parseInt(searchParams.get('page') || '1', 10);
     const limit = 20;
     const from = (page - 1) * limit;

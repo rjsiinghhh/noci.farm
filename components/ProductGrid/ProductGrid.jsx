@@ -14,6 +14,7 @@ import {
   SIZE_OPTIONS,
   STANDARD_SIZE,
 } from '@/data/products';
+import { freeEntitlementForQuantity } from '@/lib/bogo';
 import './ProductGrid.css';
 
 // Helper to check if product is eligible for BOGO
@@ -33,7 +34,7 @@ const hasStripeConfig = item => {
 const getCartItemKey = (id, size = STANDARD_SIZE) => `${id}::${size}`;
 
 export default function ProductGrid({ items, onItemClick }) {
-  const { addItem, buyNow, openCart } = useCart();
+  const { state, addItem, buyNow, openCart } = useCart();
   const router = useRouter();
   const [isGiftPackModalOpen, setIsGiftPackModalOpen] = useState(false);
   const [currentGiftPackItem, setCurrentGiftPackItem] = useState(null);
@@ -82,9 +83,20 @@ export default function ProductGrid({ items, onItemClick }) {
       return;
     }
 
-    // Regular product - add to cart with selected size and show BOGO modal
+    // Regular product - add to cart with selected size
     const size = getSizeForItem(item);
     const price = getProductPrice(item, size);
+
+    // Determine whether this add earns a new free pick (buy 2, get 1).
+    const existingPaidLine = state.items.find(
+      cartItem =>
+        cartItem.id === item.id &&
+        cartItem.size === size &&
+        !cartItem.isFreeItem,
+    );
+    const prevQuantity = existingPaidLine ? existingPaidLine.quantity : 0;
+    const nextQuantity = prevQuantity + 1;
+
     addItem({
       id: item.id,
       name: item.name,
@@ -94,9 +106,16 @@ export default function ProductGrid({ items, onItemClick }) {
       quantity: 1,
     });
 
-    // Open BOGO selection modal for eligible products (pass item with selected size)
-    setCurrentBOGOTriggerItem({ ...item, size });
-    setIsBOGOModalOpen(true);
+    // Only offer a free item when crossing a new free-entitlement threshold.
+    if (
+      freeEntitlementForQuantity(nextQuantity) >
+      freeEntitlementForQuantity(prevQuantity)
+    ) {
+      setCurrentBOGOTriggerItem({ ...item, size });
+      setIsBOGOModalOpen(true);
+    } else {
+      openCart();
+    }
   };
 
   // Handle free item selection from BOGO modal

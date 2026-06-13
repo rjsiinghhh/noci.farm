@@ -5,11 +5,18 @@ import {
   CartValidationError,
   calculateCartTotals,
   normalizeIncomingItems,
+  validateCustomerInfo,
 } from '@/lib/cart-validation';
+import {
+  ORDER_ACCESS_COOKIE,
+  ORDER_ACCESS_COOKIE_OPTIONS,
+  buildOrderAccessCookieValue,
+} from '@/lib/order-access';
 
 export async function POST(request) {
   try {
     const { items, customerInfo } = await request.json();
+    validateCustomerInfo(customerInfo);
     const normalizedItems = normalizeIncomingItems(items);
 
     const { subtotal, shipping, total } = calculateCartTotals(
@@ -57,11 +64,21 @@ export async function POST(request) {
       },
     });
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       clientSecret: paymentIntent.client_secret,
       paymentIntentId: paymentIntent.id,
       amount: total,
     });
+
+    // Bind this browser to the new PaymentIntent so it (and only it) can later
+    // read the order via /api/stripe-order on the confirmation page.
+    response.cookies.set(
+      ORDER_ACCESS_COOKIE,
+      buildOrderAccessCookieValue(request, paymentIntent.id),
+      ORDER_ACCESS_COOKIE_OPTIONS,
+    );
+
+    return response;
   } catch (error) {
     console.error('Error creating payment intent:', error);
     if (error instanceof CartValidationError) {

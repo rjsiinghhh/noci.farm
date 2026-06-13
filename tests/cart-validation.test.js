@@ -53,13 +53,33 @@ describe('normalizeIncomingItems', () => {
     ).toThrow(CartValidationError);
   });
 
-  it('rejects free items when free quantity exceeds paid quantity entitlement', () => {
+  it('rejects a free item when only one paid unit is purchased (buy 2 get 1)', () => {
     expect(() =>
       normalizeIncomingItems([
         {
           id: '1',
           size: SIZE_4_OZ,
           quantity: 1,
+          isFreeItem: false,
+        },
+        {
+          id: '3',
+          size: SIZE_4_OZ,
+          quantity: 1,
+          isFreeItem: true,
+          linkedToCartItemKey: `1::${SIZE_4_OZ}`,
+        },
+      ]),
+    ).toThrow(CartValidationError);
+  });
+
+  it('rejects free items when free quantity exceeds the buy-2-get-1 entitlement', () => {
+    expect(() =>
+      normalizeIncomingItems([
+        {
+          id: '1',
+          size: SIZE_4_OZ,
+          quantity: 2,
           isFreeItem: false,
         },
         {
@@ -93,12 +113,34 @@ describe('normalizeIncomingItems', () => {
     ).toThrow(CartValidationError);
   });
 
-  it('accepts valid paid plus linked free selection and preserves free item metadata', () => {
+  it('accepts one free item for two paid units and preserves free item metadata', () => {
     const normalized = normalizeIncomingItems([
       {
         id: '1',
         size: SIZE_4_OZ,
         quantity: 2,
+        isFreeItem: false,
+      },
+      {
+        id: '3',
+        size: SIZE_4_OZ,
+        quantity: 1,
+        isFreeItem: true,
+        linkedToCartItemKey: `1::${SIZE_4_OZ}`,
+      },
+    ]);
+
+    expect(normalized).toHaveLength(2);
+    expect(normalized[1].isFreeItem).toBe(true);
+    expect(normalized[1].linkedToCartItemKey).toBe(`1::${SIZE_4_OZ}`);
+  });
+
+  it('accepts two free items for four paid units (buy 2 get 1, twice)', () => {
+    const normalized = normalizeIncomingItems([
+      {
+        id: '1',
+        size: SIZE_4_OZ,
+        quantity: 4,
         isFreeItem: false,
       },
       {
@@ -111,8 +153,7 @@ describe('normalizeIncomingItems', () => {
     ]);
 
     expect(normalized).toHaveLength(2);
-    expect(normalized[1].isFreeItem).toBe(true);
-    expect(normalized[1].linkedToCartItemKey).toBe(`1::${SIZE_4_OZ}`);
+    expect(normalized[1].quantity).toBe(2);
   });
 });
 

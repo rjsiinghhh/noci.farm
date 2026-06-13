@@ -1,11 +1,20 @@
 import { NextResponse } from 'next/server';
 import { createSupabaseServerClient } from '@/lib/supabase';
+import { requireAdmin } from '@/lib/admin-auth';
+
+// Strip characters that have meaning in a PostgREST `.or()`/ilike filter so a
+// search term can't break out of the intended filter (filter injection).
+const sanitizeSearchTerm = value =>
+  String(value).replace(/[,()*\\%]/g, ' ').trim();
 
 export async function GET(request) {
+  const unauthorized = requireAdmin(request);
+  if (unauthorized) return unauthorized;
+
   try {
     const { searchParams } = new URL(request.url);
     const status = searchParams.get('status');
-    const search = searchParams.get('search');
+    const search = sanitizeSearchTerm(searchParams.get('search') || '');
     const page = parseInt(searchParams.get('page') || '1', 10);
     const limit = 20;
     const from = (page - 1) * limit;

@@ -1,16 +1,12 @@
 import { NextResponse } from 'next/server';
 import { createSupabaseServerClient } from '@/lib/supabase';
+import { requireAdmin } from '@/lib/admin-auth';
 
 export async function GET(request) {
+  const unauthorized = requireAdmin(request);
+  if (unauthorized) return unauthorized;
+
   try {
-    // Check admin authentication (simple check via header or query param)
-    // In production, use proper session management
-    const authHeader = request.headers.get('authorization');
-    const adminSecret = process.env.ADMIN_SECRET_KEY;
-
-    // For now, we'll rely on the client-side auth check
-    // In a real app, you'd verify a session token here
-
     const supabase = createSupabaseServerClient();
 
     // Get total orders count
