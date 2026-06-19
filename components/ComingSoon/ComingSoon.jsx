@@ -10,7 +10,7 @@ const ComingSoon = () => {
           <br /> Get 1 Free
         </h2>
         <p className="coming-soon-description">
-          Sourced from Northern California Farmers Stands · Delivered to Your Door
+          Planted In Northern California & Made In a Home Kitchen
         </p>
       </div>
     </section>

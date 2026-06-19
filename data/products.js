@@ -1,5 +1,4 @@
-// Size keys — kept for cart/validation backwards compatibility.
-// Fruit products use STANDARD_SIZE (single price, no size variants).
+// Size keys — must match lib/stripe.js and ProductGrid SIZE_OPTIONS
 export const SIZE_4_OZ = '4 OZ';
 export const SIZE_2_5_OZ = '2.5 OZ';
 export const STANDARD_SIZE = 'Standard';
@@ -36,86 +35,108 @@ export function getProductPrice(product, size = DEFAULT_SIZE) {
   return product.price ?? 0;
 }
 
-// TODO: Add product images to /public/images/ and /public/products-details/
-// TODO: Create new Stripe products in your dashboard and update lib/stripe.js with the new IDs
 export const productItems = [
   {
     id: '1',
-    name: 'Strawberries',
-    image: '/images/strawberries.jpg',
-    detailImage: '/products-details/strawberries.jpg',
+    name: 'Raw Walnuts',
+    image: '/images/raw-walnuts.png',
+    detailImage: '/products-details/raw-walnuts.jpeg',
     description:
-      'Sun-ripened California strawberries sourced fresh from local farmers stands. Picked at peak sweetness — perfect for snacking, smoothies, or dessert. Sold by the pint.',
-    price: 8,
+      'Fresh, Raw Chandler Walnuts harvested in mid October. Packed with omega-3 fatty acids and antioxidants, walnuts provide a range of health benefits while naturally helping to curb appetite. (4 oz)',
+    price: 6,
+    pricesBySize: { [SIZE_4_OZ]: 6, [SIZE_2_5_OZ]: 3 },
   },
+  // {
+  //   id: '2',
+  //   name: 'Raw Almonds',
+  //   image: '',
+  //   description:
+  //     'Almonds grown in Northern California. (4 oz)',
+  //   price: 6,
+  // },
   {
     id: '3',
-    name: 'Blueberries',
-    image: '/images/blueberries.jpg',
-    detailImage: '/products-details/blueberries.jpg',
+    name: 'Candied Walnuts',
+    image: '/images/candied-walnuts.png',
+    detailImage: '/products-details/candied-walnuts.jpeg',
     description:
-      'Plump, antioxidant-rich blueberries from local California farms. Naturally sweet with no additives — just pure, fresh fruit. Sold by the pint.',
-    price: 8,
+      'Walnuts grown in Northern California. Candied Walnuts baked in our kitchen. Ingredients: Granulated Sugar, Cinnamon, Egg Whites, Vanilla Extract, Himalayan Pink Salt, Walnuts. (4 oz)',
+    price: 6,
+    pricesBySize: { [SIZE_4_OZ]: 6, [SIZE_2_5_OZ]: 3 },
   },
   {
     id: '4',
-    name: 'Avocados',
-    image: '/images/avocados.jpg',
-    detailImage: '/products-details/avocados.jpg',
+    name: 'Honey Roasted Walnuts',
+    image: '/images/honey-roasted-walnuts.png',
+    detailImage: '/products-details/honey-roasted-walnuts.jpeg',
     description:
-      'Creamy California avocados sourced from local growers. Picked at the right moment so they arrive ready to eat. Sold in a bag of 3.',
-    price: 9,
+      'The perfect blend of sweetness and crunch. Ingredients: Walnuts, Locally Sourced Honey, Salted Butter, & Granulated Sugar. (4 oz)',
+    price: 6,
+    pricesBySize: { [SIZE_4_OZ]: 6, [SIZE_2_5_OZ]: 3 },
   },
+  // {
+  //   id: '5',
+  //   name: 'Roasted Walnuts',
+  //   image: '/images/roasted-walnuts.png',
+  //   detailImage: '/products-details/roasted-walnuts.jpeg',
+  //   description:
+  //     'Walnuts roasted just right. Ingredients: Walnuts, Olive Oil, Himalayan Pink Salt. (4 oz)',
+  //   price: 6,
+  //   pricesBySize: { [SIZE_4_OZ]: 6, [SIZE_2_5_OZ]: 3 },
+  // },
   {
     id: '6',
-    name: 'Apples',
-    image: '/images/apples.jpg',
-    detailImage: '/products-details/apples.jpg',
+    name: 'Chocolate Covered Almonds',
+    image: '/images/choc-covered-almonds.png',
+    detailImage: '/products-details/chocolate-covered-almonds.jpeg',
     description:
-      'Crisp, fresh-picked California apples from local orchards. A variety of what\'s in season — sweet, tart, and everything in between. Sold by the pound.',
-    price: 7,
+      'Almonds fresh from Northern California covered in the best chocolate. Ingredients: Freshly Harvested Almonds & Chocolate. (4 oz)',
+    price: 6,
+    pricesBySize: { [SIZE_4_OZ]: 6, [SIZE_2_5_OZ]: 3 },
   },
   {
     id: '7',
-    name: 'Tomatoes',
-    image: '/images/tomatoes.jpg',
-    detailImage: '/products-details/tomatoes.jpg',
+    name: 'Chocolate Covered Walnuts',
+    image: '/images/choc-covered-walnuts.png',
+    detailImage: '/products-details/chocolate-covered-walnuts.jpeg',
     description:
-      'Vine-ripened California tomatoes with real flavor — nothing like the grocery store kind. Sourced direct from farmers stands at peak season. Sold by the pound.',
-    price: 7,
+      'Walnuts fresh from the family ranch covered in chocolate. Ingredients: Freshly Harvested Walnuts & Chocolate. (4 oz)',
+    price: 6,
+    pricesBySize: { [SIZE_4_OZ]: 6, [SIZE_2_5_OZ]: 3 },
   },
   {
     id: '8',
-    name: 'Oranges',
-    image: '/images/oranges.jpg',
-    detailImage: '/products-details/oranges.jpg',
+    name: 'Trail Mix',
+    image: '/images/trail-mix.png',
+    detailImage: '/products-details/trail-mix.jpeg',
     description:
-      'Sweet California oranges bursting with juice and vitamin C. Sourced from local citrus growers and delivered fresh to your door. Sold by the pound.',
-    price: 7,
+      'When on the trail, mix it up! Ingredients: Raw Walnuts, Cranberries, Chocolate Chips, Granola && Pretzel Sticks.  (4 oz)',
+    price: 6,
+    pricesBySize: { [SIZE_4_OZ]: 6, [SIZE_2_5_OZ]: 3 },
   },
   {
     id: '9',
-    name: 'Seasonal Produce Box',
-    image: '/images/seasonal-box.jpg',
-    detailImage: '/products-details/seasonal-box.jpg',
+    name: 'Variety Pack',
+    image: '/images/mix-items.jpg',
+    detailImage: '/products-details/variety-pack.jpeg',
     description:
-      "A curated box of what's freshest this week at local farmers stands. A mix of fruit and produce, always picked at peak ripeness. Contents vary week to week.",
-    price: 28,
+      'Raw Walnuts, Chocolate Covered Walnuts & Almonds & Trail Mix. Can be changed if requested. (16 oz)',
+    price: 15,
     type: 'variety-pack',
-    badge: 'Best of Season',
-    contents: ['1', '3', '6', '8'],
+    badge: 'Save 25%',
+    contents: ['1', '3', '4', '8'], // IDs of included products
   },
   {
     id: '10',
-    name: 'Custom Produce Box',
-    image: '/images/custom-box.jpg',
-    detailImage: '/products-details/custom-box.jpg',
+    name: 'Gift Pack',
+    image: '/images/gift-basket.jpg',
+    detailImage: '/products-details/gift-pack.jpeg',
     description:
-      "Build your own box. Pick any 5 items from what's available at the stand this week. Perfect for families or gifting.",
-    price: 32,
+      "Choose any 5 items! (20 oz)",
+    price: 20,
     type: 'gift-pack',
-    badge: 'Your Choice',
-    selectCount: 5,
+    badge: 'Best Value',
+    selectCount: 5, // User must select 5 items
   },
 ];
 
