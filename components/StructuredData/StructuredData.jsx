@@ -9,7 +9,7 @@ const StructuredData = ({ type, data }) => {
           url: 'https://noci.farm',
           logo: 'https://noci.farm/images/noci-full-logo.png',
           description:
-            'Premium handcrafted walnut products made with love in Northern California. Specializing in candied walnuts and honey walnut butter.',
+            'Fresh, seasonal fruit delivered from Northern California farmers stands. Connecting local growers with families who want real, ripe, farm-fresh produce.',
           address: {
             '@type': 'PostalAddress',
             addressCountry: 'US',
@@ -53,7 +53,7 @@ const StructuredData = ({ type, data }) => {
             ratingValue: data.rating || '4.9',
             reviewCount: '50',
           },
-          category: 'Food & Beverage > Nuts & Seeds',
+          category: 'Food & Beverage > Fresh Produce',
         };
 
       case 'breadcrumb':
@@ -75,7 +75,7 @@ const StructuredData = ({ type, data }) => {
           name: 'Noci Farm',
           url: 'https://noci.farm',
           description:
-            'Premium handcrafted walnut products made with love in Northern California',
+            'Fresh fruit delivery from Northern California farmers stands — sourced weekly, picked at peak ripeness.',
           potentialAction: {
             '@type': 'SearchAction',
             target: 'https://noci.farm/search?q={search_term_string}',

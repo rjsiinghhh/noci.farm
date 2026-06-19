@@ -7,15 +7,15 @@ const Hero = () => {
       <div className="hero-content">
         <div className="hero-info">
           <h1 className="hero-title">
-           Crunchy. <br /> Tasty. <br /> & Healthy.
+            Fresh. <br /> Local. <br /> & Ripe.
             <br />
           </h1>
           <p className="hero-description">
-            Homemade walnut snacks - the perfect mix of crunch, sweetness & real
-            natural ingredients. Farmed in Northern California & made for you.
+            Farm-fresh fruit delivered from Northern California farmers stands
+            straight to your door. Sourced weekly, picked at peak season.
           </p>
           <h2 className="hero-subtitle">
-            Currently only selling in California
+            Currently only delivering in California
           </h2>
         </div>
         {/* <div className="hero-image">
